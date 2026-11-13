@@ -1,41 +1,41 @@
-"""Configurações centrais do Assistente Operacional Universal."""
+"""
+Configurações do Sistema (Config) - Assistente Operacional Universal
+Gerenciamento centralizado de variáveis de ambiente e parâmetros globais utilizando Pydantic BaseSettings.
+"""
 
-import os
 from pathlib import Path
-
-from dotenv import load_dotenv
-
-PROJECT_ROOT = Path(__file__).resolve().parent.parent
-
-load_dotenv(PROJECT_ROOT / ".env")
+from typing import Optional
+from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
-def get_env(name: str, default: str = "") -> str:
-    """Obtém uma variável de ambiente."""
-    return os.getenv(name, default).strip()
+class Settings(BaseSettings):
+    """
+    Classe de configuração global do sistema.
+    Carrega valores do ambiente do sistema operacional ou de um arquivo .env na raiz do projeto.
+    """
+    # Configurações Gerais
+    environment: str = "development"
+    log_level: str = "INFO"
+    app_name: str = "Assistente Operacional Universal"
+
+    # Conectores e Servidores Locais
+    ollama_base_url: str = "http://localhost:11434"
+    ollama_default_model: str = "llama3"
+    vllm_base_url: str = "http://localhost:8000/v1"
+    vllm_default_model: str = "meta-llama/Meta-Llama-3-8B-Instruct"
+
+    # Chaves de API para Provedores em Nuvem (Opcionais por padrão)
+    openai_api_key: Optional[str] = None
+    anthropic_api_key: Optional[str] = None
+    huggingface_hub_token: Optional[str] = None
+
+    # Configuração do Pydantic Settings
+    model_config = SettingsConfigDict(
+        env_file=str(Path(__file__).resolve().parent.parent / ".env"),
+        env_file_encoding="utf-8",
+        extra="ignore"
+    )
 
 
-APP_NAME = get_env("APP_NAME", "Assistente Operacional Universal")
-APP_ENV = get_env("APP_ENV", "development")
-DEBUG = get_env("DEBUG", "false").lower() == "true"
-LOG_LEVEL = get_env("LOG_LEVEL", "INFO").upper()
-
-OLLAMA_BASE_URL = get_env(
-    "OLLAMA_BASE_URL",
-    "http://localhost:11434",
-).rstrip("/")
-
-OLLAMA_MODEL = get_env("OLLAMA_MODEL", "llama3.2:1b")
-OLLAMA_EMBEDDING_MODEL = get_env(
-    "OLLAMA_EMBEDDING_MODEL",
-    "nomic-embed-text",
-)
-
-TELEGRAM_BOT_TOKEN = get_env("TELEGRAM_BOT_TOKEN")
-OPENAI_API_KEY = get_env("OPENAI_API_KEY")
-
-DATA_DIR = PROJECT_ROOT / "data"
-STORAGE_DIR = PROJECT_ROOT / "storage"
-
-DATA_DIR.mkdir(parents=True, exist_ok=True)
-STORAGE_DIR.mkdir(parents=True, exist_ok=True)
+# Instância global de configurações compartilhada em todo o projeto
+settings = Settings()
