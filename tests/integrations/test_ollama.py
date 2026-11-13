@@ -126,3 +126,10 @@ def test_execute_max_retries_exceeded(mock_post, mock_sleep, ollama_config):
         client.execute(prompt="Teste falha total")
     
     assert mock_post.call_count == ollama_config["max_retries"]
+    
+def test_execute_max_retries_exceeded(ollama_client):
+    """Garante que o cliente lança exceção após esgotar o número máximo de tentativas."""
+    # Configura o mock para falhar persistentemente
+    # ...
+    with pytest.raises(Exception, match="Erro de rede persistente"):
+        ollama_client.execute(prompt="Teste de falha")
