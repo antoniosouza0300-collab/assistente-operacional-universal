@@ -51,5 +51,10 @@ def get_logger(name: str) -> structlog.stdlib.BoundLogger:
     """
     Retorna uma instância concreta do logger estruturado.
     """
-    logger = structlog.get_logger(name)
-    return logger._proxy_to_logger()
+    config = structlog.get_config()
+
+    return structlog.stdlib.BoundLogger(
+        logging.getLogger(name),
+        config["processors"],
+        {},
+    )
