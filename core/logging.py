@@ -51,4 +51,4 @@ def get_logger(name: str) -> structlog.stdlib.BoundLogger:
     """
     Retorna um logger estruturado configurado para o módulo especificado.
     """
-    return structlog.stdlib.get_logger(name)
+    return structlog.stdlib.get_logger(name).blind()
