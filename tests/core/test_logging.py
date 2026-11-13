@@ -14,12 +14,17 @@ def test_configure_logging_development(monkeypatch):
     logger = get_logger("test_module_dev")
     
     assert logger is not None
+    assert hasattr(logger, "info")
+    assert hasattr(logger, "error")
 
 
 def test_configure_logging_production(monkeypatch):
     """Valida a configuração de logging no ambiente de produção (com JSONRenderer)."""
     monkeypatch.setenv("ENVIRONMENT", "production")
+    
     configure_logging()
     logger = get_logger("test_module_prod")
     
     assert logger is not None
+    assert hasattr(logger, "info")
+    assert hasattr(logger, "error")
