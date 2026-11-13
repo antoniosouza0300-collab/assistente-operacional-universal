@@ -5,7 +5,7 @@ Implementa a integração com modelos locais executados via Ollama com suporte a
 
 import time
 import requests
-from typing import Any, Dict, Optional
+from typing import Any, Dict
 
 from core.logging import get_logger
 from integrations.base import BaseIntegration, IntegrationError
@@ -40,7 +40,7 @@ class OllamaIntegration(BaseIntegration):
             return False
 
     def execute(self, **kwargs: Any) -> Any:
-        """Executa inferência no Ollama com política de retry."""
+        """Executa inferência no Ollama com política de retry e tratamento robusto de erros."""
         self._validate_initialization()
         prompt = kwargs.get("prompt")
         model = kwargs.get("model", self.default_model)
