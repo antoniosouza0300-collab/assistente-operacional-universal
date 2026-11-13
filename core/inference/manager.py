@@ -1,11 +1,13 @@
 """
 Gerenciador de Inferência (Core) - Assistente Operacional Universal
-Orquestra, valida e padroniza as chamadas aos diferentes conectores de IA do framework.
+Orquestra, valida e padroniza as chamadas aos diferentes conectores de IA do framework,
+integrando-se com as configurações globais (settings).
 """
 
 import logging
 from typing import Any, Dict, Optional
 
+from config.settings import Settings, settings as default_settings
 from integrations.base import IntegrationError
 
 logger = logging.getLogger(__name__)
@@ -13,12 +15,14 @@ logger = logging.getLogger(__name__)
 
 class InferenceManager:
     """
-    Gerenciador central de inferências e modelos.
+    Gerenciador central de inferências e modelos integrado com settings.
     Mantém o registro dos conectores ativos e roteia as execuções de forma unificada.
     """
 
-    def __init__(self) -> None:
+    def __init__(self, settings_instance: Optional[Settings] = None) -> None:
+        self.settings = settings_instance or default_settings
         self.integrations: Dict[str, Any] = {}
+        logger.info("InferenceManager inicializado no ambiente: %s", self.settings.environment)
 
     def register_integration(self, name: str, integration_client: Any) -> None:
         """
