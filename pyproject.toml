@@ -15,4 +15,4 @@ dependencies = [
 ]
 
 [tool.setuptools.packages.find]
-include = ["core*", "config*", "integrations*"]
+include = ["core*", "config*", "integrations*", "cli*"]
