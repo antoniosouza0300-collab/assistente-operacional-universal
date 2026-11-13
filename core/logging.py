@@ -49,6 +49,7 @@ def configure_logging() -> None:
 
 def get_logger(name: str) -> structlog.stdlib.BoundLogger:
     """
-    Retorna um logger estruturado configurado para o módulo especificado.
+    Retorna uma instância concreta do logger estruturado.
     """
-    return structlog.stdlib.get_logger(name).blind()
+    logger = structlog.get_logger(name)
+    return logger._proxy_to_logger()
