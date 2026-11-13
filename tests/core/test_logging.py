@@ -3,6 +3,7 @@ Testes Unitários para o Sistema de Logging Estruturado - Assistente Operacional
 Valida a configuração do structlog para os ambientes de desenvolvimento e produção.
 """
 
+import structlog
 from core.logging import configure_logging, get_logger
 
 
