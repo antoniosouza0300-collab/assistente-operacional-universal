@@ -1,1 +1,7 @@
-"""Orquestração central de agentes e fluxos de trabalho."""
+"""
+Submódulo de Orquestração (Core) - Assistente Operacional Universal
+"""
+
+from core.orchestrator.engine import WorkflowOrchestrator, WorkflowStep
+
+__all__ = ["WorkflowOrchestrator", "WorkflowStep"]
