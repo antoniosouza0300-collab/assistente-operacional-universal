@@ -1,6 +1,6 @@
 """
 Conector Ollama - Assistente Operacional Universal
-Implementa a integração com modelos locais executados via Ollama com suporte a retry.
+Implementa a integração com modelos locais executados via Ollama com suporte a retry e tratamento robusto de erros.
 """
 
 import time
@@ -40,7 +40,7 @@ class OllamaIntegration(BaseIntegration):
             return False
 
     def execute(self, **kwargs: Any) -> Any:
-        """Executa inferência no Ollama com política de retry e tratamento robusto de erros."""
+        """Executa inferência no Ollama com política de retry e tratamento de exceções."""
         self._validate_initialization()
         prompt = kwargs.get("prompt")
         model = kwargs.get("model", self.default_model)
