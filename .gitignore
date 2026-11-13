@@ -1,38 +1,75 @@
-# Python
+# ==========================================
+# Variáveis de Ambiente e Credenciais
+# ==========================================
+.env
+.env.local
+.env.*.local
+
+# ==========================================
+# Python - Caches e Compilação
+# ==========================================
 __pycache__/
 *.py[cod]
-*.pyo
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
 *.egg-info/
-.venv/
+.installed.cfg
+*.egg
+MANIFEST
+
+# ==========================================
+# Ambientes Virtuais (Virtual Environments)
+# ==========================================
 venv/
+ENV/
 env/
+.venv/
 
-# Secrets
-.env
-.env.*
-!.env.example
+# ==========================================
+# Ferramentas de Teste, Qualidade e Cache
+# ==========================================
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+.cache/
 
-# Databases and vector stores
-*.sqlite3
-*.db
-chroma_db/
-storage/
-
-# Logs
-*.log
-logs/
-
-# Notebooks
-.ipynb_checkpoints/
-
-# IDEs
+# ==========================================
+# IDEs e Editores (VS Code, PyCharm, etc.)
+# ==========================================
 .vscode/
 .idea/
+*.swp
+*.swo
+*.swn
+.project
+.pydevproject
+.settings/
 
-# System files
+# ==========================================
+# Arquivos do Sistema Operacional
+# ==========================================
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
 Thumbs.db
-
-# Temporary files
-*.tmp
-*.bak
