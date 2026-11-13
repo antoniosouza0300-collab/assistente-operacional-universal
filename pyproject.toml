@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "assistente-operacional-universal"
+version = "0.1.0"
+description = "Assistente Operacional Universal - Framework de Orquestração de IA Modular"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "pydantic>=2.0",
+    "pydantic-settings>=2.0",
+    "structlog>=23.0",
+]
+
+[tool.setuptools.packages.find]
+include = ["core*", "config*", "integrations*"]
